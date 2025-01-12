@@ -1,0 +1,53 @@
+.login-container {
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+  }
+  
+  .login-logo img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .login-form {
+    padding: 20px;
+  }
+  
+  .formulario h2 {
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .button-container {
+    text-align: center;
+  }
+  
+  .login-btn {
+    width: 100%;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .reset-password {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
