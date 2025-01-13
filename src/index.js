@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './router/router';
 import AuthProvider from './context/AuthContext';
-import './index.css';
+import { ToastContainer } from 'react-toastify';
+import './general.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -11,6 +12,7 @@ root.render(
     <AuthProvider>
       <BrowserRouter>
         <AppRouter />
+        <ToastContainer position="top-right" autoClose={2000} hideProgressBar={true} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
       </BrowserRouter>
     </AuthProvider>
   </React.StrictMode>

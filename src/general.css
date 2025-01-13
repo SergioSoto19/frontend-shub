@@ -1,0 +1,49 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+a, p, h1, h2, h3, h4, h5, h6, span, div {
+  text-decoration: none;
+}
+
+.title{
+    font-family: Arial, sans-serif ;
+    font-weight: 900 !important; 
+}
+
+.button-Custom{
+    border-radius: 9px;
+    background-color: #7B7B7D;
+    border: none;
+    margin-top: 10px;
+    width: 100%;
+    text-align: center; 
+    padding: 8px; 
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+.button-Custom:hover{
+    background-color: #000000 !important;
+}
+
+.button-Custom:disabled {
+  background-color: #000000 !important; 
+  color: #7B7B7D; 
+  cursor: not-allowed; 
+}
+
+.form-control:focus {
+  border-color: #171b1f; 
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); 
+  outline: none; 
+}
+
+
+
+  
+
+
