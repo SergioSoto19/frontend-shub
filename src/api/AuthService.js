@@ -8,7 +8,6 @@ export const register = async (data) => {
   return await apiClient.post('/register', data);
 };
 
-
 const AuthService = {
   login,
   register

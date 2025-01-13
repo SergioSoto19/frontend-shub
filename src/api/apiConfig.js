@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: 'https://backend-shub-production.up.railway.app/api', // Asegúrate de incluir el protocolo https://
-  timeout: 10000, 
+  baseURL: 'https://backend-shub-production.up.railway.app/api', 
   headers: {
     'Content-Type': 'application/json', 
   },
