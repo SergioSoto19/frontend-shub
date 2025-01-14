@@ -4,6 +4,7 @@ import { Spinner, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import HotelService from '../../api/HotelService';
+import RegisterHotelModal from './registerHotel/RegisterHotelModal'
 import { toast } from 'react-toastify';
 import './HotelList.css';
 
@@ -11,19 +12,20 @@ import './HotelList.css';
 function HotelList() {
   const [hotels, setHotels] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
+
+  const fetchHotels = async () => {
+    try {
+      const response = await HotelService.getHotels();
+      setHotels(response.data);
+    } catch (error) {
+      console.error('Error obtener hoteles:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchHotels = async () => {
-      try {
-        const response = await HotelService.getHotels();
-        setHotels(response.data);
-      } catch (error) {
-        console.error('Error fetching hotels:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchHotels();
   }, []);
 
@@ -39,6 +41,13 @@ function HotelList() {
     } catch (error) {
       toast.error('Error al eliminar el hotel');
     }
+  };
+
+  const handleShowRegisterModal = () => setShowRegisterModal(true);
+  const handleCloseRegisterModal = () => setShowRegisterModal(false);
+
+  const handleHotelAdded = () => {
+    fetchHotels();
   };
 
   const customStyles = {
@@ -104,7 +113,6 @@ function HotelList() {
       button: true,
     },
   ];
-
   return (
     <div>
       <div className='row'>
@@ -112,7 +120,7 @@ function HotelList() {
           <h2 className="text-start title">Hoteles</h2>
         </div>
         <div className='col-12 col-md-4' >
-          <Button className="button-Custom">Agregar Hotel</Button>
+        <Button className="button-Custom" onClick={handleShowRegisterModal}>Agregar Hotel</Button>
         </div>
       </div>
 
@@ -141,6 +149,7 @@ function HotelList() {
           </div>
         </div>
       </div>
+      <RegisterHotelModal show={showRegisterModal} handleClose={handleCloseRegisterModal} onHotelAdded={handleHotelAdded}  />
     </div>
   );
 }

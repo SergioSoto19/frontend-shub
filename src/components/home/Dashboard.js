@@ -71,7 +71,7 @@ function Dashboard() {
               </Nav.Link>
               <Nav.Link className="nav-item-custom" >
                 <FontAwesomeIcon className="icon-margin" icon={faRectangleList} />
-                Reservations
+                Reservaciones 
               </Nav.Link>
               <div className="separator-line" />
             </div>
