@@ -14,16 +14,16 @@ a, p, h1, h2, h3, h4, h5, h6, span, div {
 }
 
 .button-Custom{
-    border-radius: 9px;
-    background-color: #7B7B7D;
-    border: none;
-    margin-top: 10px;
-    width: 100%;
-    text-align: center; 
-    padding: 8px; 
-    white-space: nowrap; 
-    overflow: hidden;
-    text-overflow: ellipsis; 
+    border-radius: 9px  !important; 
+    background-color: #7B7B7D  !important; 
+    border: none !important; 
+    margin-top: 10px !important; 
+    width: 100% !important; 
+    text-align: center !important; 
+    padding: 8px !important; 
+    white-space: nowrap !important;  
+    overflow: hidden !important; 
+    text-overflow: ellipsis !important;  
 }
 
 .button-Custom:hover{

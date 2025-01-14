@@ -69,7 +69,7 @@ function Dashboard() {
                 <FontAwesomeIcon className="icon-margin" icon={faHotel} />
                 Hoteles
               </Nav.Link>
-              <Nav.Link className="nav-item-custom" >
+              <Nav.Link className="nav-item-custom" onClick={()=>navigate('/dashboard/reservations')}>
                 <FontAwesomeIcon className="icon-margin" icon={faRectangleList} />
                 Reservaciones 
               </Nav.Link>

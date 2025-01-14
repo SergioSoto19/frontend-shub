@@ -2,49 +2,49 @@ import React, { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
 import { Spinner, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ReservationService from '../../../api/ReservationService';
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import HotelService from '../../api/HotelService';
-import RegisterHotelModal from './registerHotel/RegisterHotelModal'
+import RegisterReservationModal from '../registerReservation/ReservationModal';
 import { toast } from 'react-toastify';
-import './HotelList.css';
 
 
-function HotelList() {
-  const [hotels, setHotels] = useState([]);
+function ReservationList() {
+  const [reservations, setReservations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
 
-  const fetchHotels = async () => {
+  const fetchReservations = async () => {
     try {
-      const response = await HotelService.getHotels();
-      setHotels(response.data);
+      const response = await ReservationService.getReservations();
+      setReservations(response.data);
     } catch (error) {
-      console.error('Error obtener hoteles:', error);
+      console.error('Error fetching reservations:', error);
+      toast.error('Error al obtener las reservas');
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchHotels();
+    fetchReservations();
   }, []);
 
   const handleEdit = (id) => {
-    console.log(`actualizar hotel: ${id}`);
+    console.log(`actualizar Reserva: ${id}`);
   };
 
   const handleDelete = async (id) => {
     try {
-      const response = await HotelService.deleteHotel(id);
-      toast.success(response.data.message || 'Hotel eliminado exitosamente');
-      setHotels(hotels.filter(hotel => hotel.id !== id));
+      const response = await ReservationService.deleteReservation(id);
+      toast.success(response.data.message || 'Reserva eliminada exitosamente');
+      setReservations(reservations.filter(reservation => reservation.id !== id));
     } catch (error) {
       if (error.response && error.response.data && error.response.data.message) {
         toast.error(error.response.data.message);
       } else if (error.response && error.response.data && error.response.data.error) {
         toast.error(error.response.data.error);
       } else {
-        toast.error('Error al eliminar el hotel');
+        toast.error('Error al eliminar la reserva');
       }
     }
   };
@@ -52,8 +52,8 @@ function HotelList() {
   const handleShowRegisterModal = () => setShowRegisterModal(true);
   const handleCloseRegisterModal = () => setShowRegisterModal(false);
 
-  const handleHotelAdded = () => {
-    fetchHotels();
+  const handleReservationAdded = () => {
+    fetchReservations();
   };
 
   const customStyles = {
@@ -90,8 +90,10 @@ function HotelList() {
 
   const columns = [
     { name: 'ID', selector: row => row.id, sortable: true },
-    { name: 'Nombre', selector: row => row.name, sortable: true },
-    { name: 'Ubicación', selector: row => row.location, sortable: true },
+    { name: 'Usuario', selector: row => row.user_id, sortable: true },
+    { name: 'Hotel', selector: row => row.hotel_id, sortable: true },
+    { name: 'Fecha de Check-in', selector: row => row.check_in_date, sortable: true },
+    { name: 'Fecha de Check-out', selector: row => row.check_out_date, sortable: true },
     {
       name: 'Editar',
       cell: row => (
@@ -119,15 +121,15 @@ function HotelList() {
       button: true,
     },
   ];
+
   return (
     <div>
       <div className='row'>
         <div className='col-12 col-md-8'>
-          <h2 className="text-start title">Hoteles</h2>
+          <h2 className="text-start title">Reservas</h2>
         </div>
-        <div className='col-12 col-md-4' >
-        <Button className="button-Custom" onClick={handleShowRegisterModal}>Agregar Hotel</Button>
-   
+        <div className='col-12 col-md-4'>
+          <Button className="button-Custom" onClick={handleShowRegisterModal}>Agregar Reserva</Button>
         </div>
       </div>
 
@@ -136,7 +138,7 @@ function HotelList() {
           <div className="table-container">
             <DataTable
               columns={columns}
-              data={hotels}
+              data={reservations}
               pagination
               paginationPerPage={10}
               fixedHeader
@@ -156,9 +158,9 @@ function HotelList() {
           </div>
         </div>
       </div>
-      <RegisterHotelModal show={showRegisterModal} handleClose={handleCloseRegisterModal} onHotelAdded={handleHotelAdded}  />
+      <RegisterReservationModal show={showRegisterModal} handleClose={handleCloseRegisterModal} onReservationAdded={handleReservationAdded} />
     </div>
   );
 }
 
-export default HotelList;
+export default ReservationList;
